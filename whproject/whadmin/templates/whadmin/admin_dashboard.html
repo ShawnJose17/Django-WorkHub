@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard | WorkHub{% endblock %}
+
+{% block content %}
+<h2 class="page-title" style="margin-bottom: 20px; margin-top: 20px; text-align: center; font-size: 30pt;">Welcome, Admin</h2>
+
+<div class="admin-buttons" style="text-align: center;">
+    <a href="/whadmin/job-finders/" class="btn-primary">Job Seekers</a>
+    <a href="/whadmin/hirers/" class="btn-primary">Hirers</a>
+    <a href="/whadmin/notifications/" class="btn-primary">Notifications</a>
+    <a href="/whadmin/job-posts/" class="btn-primary">Job Posts</a>
+</div>
+
+{% endblock %}

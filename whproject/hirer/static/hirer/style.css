@@ -1,0 +1,29 @@
+.dashboard {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 20px;
+}
+
+.sidebar {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background: #e7efff;
+}
+
+.dashboard-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+}

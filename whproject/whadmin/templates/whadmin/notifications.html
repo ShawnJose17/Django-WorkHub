@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Notifications | WorkHub{% endblock %}
+
+{% block content %}
+<h2 class="page-title" style="margin-bottom: 10px; margin-top: 30px; text-align: center;">Notifications ({{ count }} notifications)</h2>
+
+<style>
+table, th, td { border: 2px solid black; border-collapse: collapse; text-align: center; padding: 10px; }
+table { width: 100%; }
+.btn-button { display:inline-block; background: #2596be; color: white !important; padding: 8px 14px; border-radius: 8px; width: 25%; margin-left: 35%; text-align: center; margin-top: 20px;}
+.btn-button:hover { background: #1b7fa1; }
+.btn-delete { background: #2596be; border-radius: 8px; color: white !important; padding: 8px 14px; transition: background 0.2s ease; }
+.btn-delete:hover { background: #1b7fa1; }
+.btn-view { display:inline-block; background: #2596be; color: white !important; padding: 8px 14px; border-radius: 8px;}
+.btn-view:hover { background: #1b7fa1; }
+</style>
+
+<table class="data-table">
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Job Field</th>
+        <th>Resume</th>
+        <th>Submitted</th>
+        <th>Actions</th>
+    </tr>
+
+    {% for n in notifs %}
+    <tr>
+        <td>{{ n.full_name }}</td>
+        <td>{{ n.email }}</td>
+        <td>{{ n.phone }}</td>
+        <td>{{ n.get_job_field_display }}</td>
+        <td>
+            {% if n.resume %}
+                <a href="{{ n.resume.url }}" target="_blank" class="btn-view">View</a>
+            {% else %}
+                -
+            {% endif %}
+        </td>
+        <td>{{ n.created_at }}</td>
+        <td>
+            <button onclick="openDeleteModalNotification({{ n.id }})" class="btn-delete" style="border: transparent;">Delete</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'whadmin:admin_home' %}" class="btn-button">Back</a>
+
+<div id="deleteModalNotification" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+    <div style="background:white; padding:20px; border-radius:8px; width:320px; text-align:center;">
+        <h3>Are you sure?</h3>
+        <p>This action cannot be undone.</p>
+
+        <form id="deleteFormNotification" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn-delete" style="border: transparent; margin-top: 10px;">Yes, Delete</button>
+        </form>
+
+        <button onclick="closeDeleteModalNotification()" class="btn-delete" style="margin-top:10px; border: transparent;">Cancel</button>
+    </div>
+</div>
+
+<script>
+function openDeleteModalNotification(notifId) {
+    const modal = document.getElementById("deleteModalNotification");
+    const form = document.getElementById("deleteFormNotification");
+    form.action = "{% url 'whadmin:delete_notification' 0 %}".replace('/0/', '/' + notifId + '/');
+    modal.style.display = "flex";
+}
+
+function closeDeleteModalNotification() {
+    document.getElementById("deleteModalNotification").style.display = "none";
+}
+</script>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'accounts/base_auth.html' %}
+
+{% block title %}Login | WorkHub{% endblock %}
+
+{% block auth_content %}
+<h2 class="auth-title" style="font-size: 25pt; text-align: center; margin-bottom: 62px;">Login</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="btn-primary" style="width: 100%;">Login</button>
+</form>
+
+<p class="auth-switch">
+    Don’t have an account? <a href="{% url 'accounts:register' %}">Register</a>
+</p>
+{% endblock %}

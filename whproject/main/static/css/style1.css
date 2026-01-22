@@ -1,0 +1,30 @@
+body {
+    background-image: url('/static/img/main-bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+h1 {
+    font-family: 'Arial';
+    font-size: 75pt;
+    padding-left: 90px;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.btn-primary {
+    background: #007bff;
+    border: none;
+    color: white;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-radius: 25px;
+    font-size: 15pt;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #006ae0;
+}

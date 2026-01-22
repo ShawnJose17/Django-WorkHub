@@ -1,0 +1,19 @@
+.auth-box {
+    max-width: 400px;
+    margin: 60px auto;
+    padding: 40px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+}
+
+.auth-box h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.auth-links {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.9rem;
+}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %}Job Details | WorkHub{% endblock %}
+
+{% block content %}
+
+<h2 class="page-title" style="margin-top: 50px; margin-bottom: 30px; text-align: center;">Job Details</h2>
+<style>
+    table, th, td {
+        border: 2px solid black;
+        border-collapse: collapse;
+        padding: 20px;        
+    }
+    
+    table {
+        width: 100%;
+    }
+
+    td {
+        padding-left: 30px;
+    }
+
+    .btn-secondary {
+        width: 25%;
+        margin-top: 25px;
+        margin-left: 450px;
+    }
+
+    .btn-primary {
+        background: #007bff;
+        border: none;
+        color: white;
+        padding-left: 25px;
+        padding-right: 25px;
+        border-radius: 6px;
+        font-size: 12pt;
+        cursor: pointer;
+    }
+
+    .btn-primary:hover {
+        background: #006ae0;
+    }
+</style>
+
+<table class="details-table" style="margin-bottom: 40px;">
+    <tr><th>Position</th><td>{{ job.job_position }}</td></tr>
+    <tr><th>Company</th><td>{{ job.company_name }}</td></tr>
+    <tr><th>Location</th><td>{{ job.location }}</td></tr>
+    <tr><th>Salary</th><td>₹{{ job.salary }}</td></tr>
+    <tr><th>Type</th><td>{{ job.job_type }}</td></tr>
+    <tr><th>Experience</th><td>{{ job.experience }}</td></tr>
+    <tr><th>Description</th><td>{{ job.description }}</td></tr>
+    <tr><th>Requirements</th><td>{{ job.requirements }}</td></tr>
+    <tr><th>Phone</th><td>{{ job.phone }}</td></tr>
+    <tr><th>Email</th><td>{{ job.email }}</td></tr>
+</table>
+
+<a href="{% url 'hirer:hirer_edit_post' job.id %}" class="btn-primary" style="margin-left: 43%;">Edit</a>
+<a href="{% url 'hirer:hirer_my_posts' %}" class="btn-primary">Back</a>
+{% endblock %}

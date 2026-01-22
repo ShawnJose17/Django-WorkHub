@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkHub</title>
+    <link rel="icon" href="{% static 'favicons/whfavicon.png' %}">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #E3F2FD;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        header {
+            background-color: white;
+            padding: 10px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo img {
+            width: 300px;
+        }
+
+        .btn-logout {
+            color: black;
+            font-weight: 500;
+            padding: 8px 12px;
+            transition: color 0.3s;
+            margin-left: 8px;
+        }
+
+        .btn-logout:hover {
+            color: #0288D1;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            position: relative;
+        }
+
+        nav ul li a {
+            color: black;
+            font-weight: 500;
+            padding: 8px 12px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #0288D1;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 35px;
+            left: 0;
+            background-color: white;
+            min-width: 150px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px 15px;
+            color: black;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #0288D1;
+            color: white;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .btn {
+            border-radius: 25px;
+            padding: 8px 20px;
+            font-weight: 500;
+            cursor: pointer;
+            border: 2px solid #0288D1;
+            transition: all 0.2s ease;
+            margin-left: 10px;
+        }
+
+        .btn-signup {
+            background-color: #0288D1;
+            color: white;
+        }
+
+        .btn-signup:hover {
+            background-color: white;
+            color: #0288D1;
+        }
+
+        .btn-signin {
+            background-color: white;
+            color: #0288D1;
+        }
+
+        .btn-signin:hover {
+            background-color: #0288D1;
+            color: white;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #0288D1;
+            color: white;
+            margin-top: 50px;
+        }
+
+        @media(max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="{% url 'main:index' %}"><img src="{% static 'favicons/wh-logo.png' %}"></a>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="{% url 'main:index' %}">Home</a></li>
+                <li class="dropdown">
+                    <a href="#">Jobs</a>
+                    <div class="dropdown-content">
+                        <a href="{% url 'finder:finder_dashboard' %}">Find a Job</a>
+                        <a href="{% url 'hirer:hirer_dashboard' %}">Hire a Person</a>
+                    </div>
+                </li>
+                <li><a href="{% url 'main:contact' %}">Contact</a></li>
+            </ul>
+
+            {% if user.is_authenticated %}
+                {% if user.is_superuser %}
+                    <span style="font-weight: 600; margin-left: 10px;">Hello, Admin</span>
+                    <a href="{% url 'whadmin:admin_home' %}" class="btn-logout">Admin</a>
+                {% else %}
+                    <span style="font-weight: 600; margin-left: 10px;">Hello, {{ user.first_name }}</span>
+                {% endif %}
+                <a href="{% url 'accounts:logout' %}" class="btn-logout">Logout</a>
+            {% else %}
+                <a href="{% url 'accounts:register' %}" class="btn btn-signup">Sign Up</a>
+                <a href="{% url 'accounts:login' %}" class="btn btn-signin">Sign In</a>
+            {% endif %}
+        </nav>
+
+    </header>
+    {% block content %}
+    {% endblock %}
+    <footer>
+        © 2025 WorkHub. All rights reserved.
+    </footer>
+</body>
+</html>

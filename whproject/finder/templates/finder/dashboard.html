@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Finder Dashboard | WorkHub{% endblock %}
+
+{% block content %}
+<h2 class="page-title" style="margin-top: 20px; margin-bottom: 20px;">Hello, {{ user.first_name }}</h2>
+
+{% for field, jobs in grouped_jobs.items %}
+    {% if jobs %}
+        <h3 class="job-field-heading" style="margin-bottom: 10px;">{{ field }}</h3>
+
+        <div class="job-grid">
+            {% for job in jobs %}
+                <div class="job-card">
+                    <h4>{{ job.job_position }}</h4>
+                    <p class="company">{{ job.company_name }}</p>
+                    <a href="/finder/job/{{ job.id }}/" class="btn-secondary">Job Details</a>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorkHub</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" href="{% static 'favicons/whfavicon.png' %}">
+</head>
+
+{% if messages %}
+<div id="popup-messages" style="
+    position: fixed;
+    margin-left: 45%;
+    margin-top: 70px;
+    background: #2d6cdf;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    z-index: 9999;
+    font-size: 14px;
+    opacity: 0.95;
+">
+    {% for message in messages %}
+        <div>{{ message }}</div>
+    {% endfor %}
+</div>
+
+<script>
+    setTimeout(() => {
+        const box = document.getElementById('popup-messages');
+        if (box) {
+            box.style.transition = "opacity 0.8s ease";
+            box.style.opacity = "0";
+            setTimeout(() => box.remove(), 800);
+        }
+    }, 2500);
+</script>
+{% endif %}
+
+<body>
+
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">
+                <a href="{% url 'main:index' %}">
+                    <img src="{% static 'favicons/wh-logo.png' %}" style="width: 300px;">
+                </a>
+            </div>
+
+            <nav class="nav-links">
+                {% if user.is_authenticated %}
+                    {% if user.is_superuser %}
+                        <a href="{% url 'whadmin:admin_home' %}" class="nav-item">Admin</a>
+
+                    {% elif user.user_type == 'finder' %}
+                        <a href="{% url 'finder:finder_dashboard' %}" class="nav-item">Finder's Dashboard</a>
+                        <a href="{% url 'finder:notification_form' %}" class="nav-item">Notification Form</a>
+                        <a href="{% url 'finder:my_notifications' %}" class="nav-item">My Notifications</a>
+
+                    {% elif user.user_type == 'hirer' %}
+                        <a href="{% url 'hirer:hirer_dashboard' %}" class="nav-item">Hirer's Dashboard</a>
+                        <a href="{% url 'hirer:hirer_my_posts' %}" class="nav-item">My Job Posts</a>
+                    {% endif %}
+
+                    <a href="{% url 'accounts:logout' %}" class="nav-item">Logout</a>
+
+                {% else %}
+                    <a href="{% url 'accounts:login' %}" class="nav-item">Login</a>
+                    <a href="{% url 'accounts:register' %}" class="nav-item">Register</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <p>© 2025 WorkHub. All rights reserved.</p>
+    </footer>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Hirers | WorkHub{% endblock %}
+
+{% block content %}
+<h2 class="page-title" style="margin-bottom: 10px; margin-top: 30px; text-align: center;">Hirer Users ({{ count }} users)</h2>
+
+<style>
+table, th, td { border: 2px solid black; border-collapse: collapse; text-align: center; padding: 10px; }
+table { width: 100%; }
+.btn-button { display:inline-block; background: #2596be; color: white !important; padding: 8px 14px; border-radius: 8px; width: 25%; margin-left: 35%; text-align: center; margin-top: 20px;}
+.btn-button:hover {
+        background: #1b7fa1;
+    }
+.btn-delete { background: #2596be; border-radius: 8px; color: white !important; padding: 8px 14px; }
+</style>
+
+<table class="admin-table">
+    <tr>
+        <th>First</th><th>Last</th><th>Email</th><th>Phone</th><th>Action</th>
+    </tr>
+
+    {% for u in users %}
+    <tr>
+        <td>{{ u.first_name }}</td>
+        <td>{{ u.last_name }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.phone }}</td>
+        <td>
+            <button onclick="openDeleteModalHirer({{ u.id }})" class="btn-delete" style="border: transparent;">Delete</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{% url 'whadmin:admin_home' %}" class="btn-button">Back</a>
+
+<div id="deleteModalHirer" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+    <div style="background:white; padding:20px; border-radius:8px; width:320px; text-align:center;">
+        <h3>Are you sure?</h3>
+        <p>This action cannot be undone.</p>
+
+        <form id="deleteFormHirer" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="btn-delete" style="border: transparent; margin-top: 10px;">Yes, Delete</button>
+        </form>
+
+        <button onclick="closeDeleteModalHirer()" class="btn-delete" style="margin-top:10px; border: transparent;">Cancel</button>
+    </div>
+</div>
+
+<script>
+function openDeleteModalHirer(userId) {
+    const modal = document.getElementById("deleteModalHirer");
+    const form = document.getElementById("deleteFormHirer");
+    form.action = "{% url 'whadmin:delete_hirer' 0 %}".replace('/0/', '/' + userId + '/');
+    modal.style.display = "flex";
+}
+function closeDeleteModalHirer() {
+    document.getElementById("deleteModalHirer").style.display = "none";
+}
+</script>
+
+{% endblock %}

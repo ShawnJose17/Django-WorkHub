@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Confirm Delete | WorkHub{% endblock %}
+
+{% block content %}
+<div style="max-width:500px; margin:30px auto; text-align:center;">
+    <h3>Delete notification</h3>
+    <p>Are you sure you want to delete <strong>{{ note.full_name }}</strong>?</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" class="btn-secondary" style="background:#e05d5d; border:none;">Yes, delete</button>
+        <a href="{% url 'finder:my_notifications' %}" class="btn-primary" style="margin-left:10px;">Cancel</a>
+    </form>
+</div>
+{% endblock %}

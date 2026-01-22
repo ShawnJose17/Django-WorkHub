@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% extends 'main/base.html' %}
+{% block content %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.698503095286!2d77.68288451531558!3d12.927089243079783!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae13a74fac1927%3A0xb1b4e157aa7e2018!2sLinkedIn!5e0!3m2!1sen!2sin!4v1765114646577!5m2!1sen!2sin" width="600" height="496" style="border:0; margin-bottom: -54px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="contact" style="margin-left: 7%;">
+        <h1 style="margin-left: 45%; margin-top: -385px; margin-bottom: 35px;">CONTACT US</h1>
+        <img src="{% static 'favicons/phone.png' %}" style="width: 35px; margin-left: 45%; margin-top: 10px;">
+        <p style="margin-left: 49%; margin-top: -55px; font-size: 15pt;">(650) 687-3600</p>
+        <p style="margin-left: 49%; font-size: 15pt;">(703) 679-7719</p>
+        <img src="{% static 'favicons/email.png' %}" style="width: 35px; margin-left: 45%; margin-top: 75px;">
+        <p style="font-size: 15pt; margin-left: 49%; margin-top: -95px;">support@workhub.com</p>
+        <p style="font-size: 15pt; margin-left: 49%;">workhub_support@cs.workhub.com</p>
+        <p style="font-size: 15pt; margin-left: 49%;">helpdesk@workhub.com</p>
+        <p style="font-size: 15pt; margin-left: 49%;">mobile_support@workhub.com</p>
+        <img src="{% static 'favicons/website.png' %}" style="width: 35px; margin-left: 45%; margin-top: 20px;">
+        <p style="font-size: 15pt; margin-left: 49%; margin-top: -35px; margin-bottom: -7px;">support.workhubhelper.com</p>
+    </div>
+</body>
+</html>
+{% endblock %}
