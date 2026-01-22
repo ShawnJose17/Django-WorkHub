@@ -1,11 +1,11 @@
-# WorkHub - Django Project
+<h1 align="center">WorkHub - Django Project</h1>
 
 WorkHub is a web-based platform built with Django designed as job portal featuring a robust 3-tier user system (Finders, Hirers, & Admins). Includes custom dashboards, role-based access control, job posting CRUD, and notification management. Built with Python, namespaced routing, and a custom user model. 🚀
 
 ## 📋 Features
 - User Authentication (Login/Signup)
-- [Feature 2: e.g., Post a job]
-- [Feature 3: e.g., Application tracking]
+- Post a job
+- Application tracking
 - Responsive UI
 
 ## 🛠️ Prerequisites
@@ -78,13 +78,13 @@ python manage.py runserver
 Open your browser and go to http://127.0.0.1:8000/.
 
 ## 📂 Project Structure
-•   WorkHub/: Main project configuration (settings, urls, wsgi).
+- WorkHub/: Main project configuration (settings, urls, wsgi).
+  
+- [App-Name]/: Main application logic (models, views, templates).
 
-•   [App-Name]/: Main application logic (models, views, templates).
+- templates/: HTML files.
 
-•   templates/: HTML files.
-
-•   static/: CSS, JavaScript, and Images.
+- static/: CSS, JavaScript, and Images.
 
 ## 🤝 Contributing
 1.  Fork the Project
